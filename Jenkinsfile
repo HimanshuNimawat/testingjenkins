@@ -1,7 +1,7 @@
 #!/usr/bin/env groovy
 
 pipeline {
-
+    agent any
     stages {
         stage('Checkout') {
             steps {
@@ -10,7 +10,7 @@ pipeline {
             }
         }
 
-    stage('Powershell') {
+    	stage('Powershell') {
 	    when { 
                 allOf {
                     // Will not push to repo if the build is unstable at this point.
