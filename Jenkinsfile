@@ -17,7 +17,7 @@ pipeline {
                     if (env.BRANCH_NAME == "main") {
                         powershell 'echo \'main\''
                     } else if (env.BRANCH_NAME == "develop") {
-                        powershell 'echo \'hotfix\''
+                        powershell 'echo \'develop\''
                     } else if (env.BRANCH_NAME == "release") {
                         powershell 'echo \'release\''
                     }
