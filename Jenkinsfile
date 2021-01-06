@@ -15,11 +15,11 @@ pipeline {
                 script {
                     
                     if (env.BRANCH_NAME == "main") {
-                        powershell echo 'main'
-                    } else if (env.BRANCH_NAME == "develop") {
-                        powershell echo 'main'
-                    } else if (env.BRANCH_NAME == "develop") {
-                        powershell echo 'main'
+                        powershell 'echo \'main\''
+                    } else if (env.BRANCH_NAME == "hotfix") {
+                        powershell 'echo \'hotfix\''
+                    } else if (env.BRANCH_NAME == "release") {
+                        powershell 'echo \'release\''
                     }
                 }
             }
