@@ -12,11 +12,14 @@ pipeline {
 	    
 	stage('Setup') {
             steps {
+		catchError(buildResult: 'SUCCESS', stageResult: 'UNSTABLE') {
+                    powershell "exit 1"
+                }
                 script {
                     
                     if (env.BRANCH_NAME == "main") {
                         powershell 'echo \'main\''
-                    } else if (env.BRANCH_NAME == "develop") {
+                    } else if (env.BRANCH_NAM == "develop") {
                         powershell 'echo \'develop\''
                     } else if (env.BRANCH_NAME == "release") {
                         powershell 'echo \'release\''
