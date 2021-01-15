@@ -12,7 +12,7 @@ pipeline {
 	    
 	stage('Setup') {
             steps {
-		catchError(buildResult: 'Failed', stageResult: 'UNSTABLE') {
+		catchError(buildResult: 'Unstable', stageResult: 'UNSTABLE') {
                     powershell "exit 1"
                 }
                 script {
