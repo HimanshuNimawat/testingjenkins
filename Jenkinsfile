@@ -30,7 +30,8 @@ pipeline {
 			steps {
 			print "Restoring Nuget Packages on sln"
 			powershell '''
-				C:\\nuget\\nuget.exe restore C:\\testing_sonarqube\\Denton.sln 
+				C:\\nuget\\nuget.exe restore C:\\testing_sonarqube\\Denton.sln -source "https://api.nuget.org/v3/index.json" `
+				-source "https://sitecore.myget.org/F/sc-packages/api/v3/index.json" -source "https://teamcity.mkcsites.com/httpAuth/app/nuget/feed/_Root/default/v2/"
 				'''
 			}
 		}
