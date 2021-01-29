@@ -15,6 +15,7 @@ pipeline {
 					print "Sonarqube Analysis Start"
 					
 							powershell """
+							    cd "C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\BuildTools\\MSBuild\\Current\\Bin"
 								C:\\Jenkins\\sonar-scanner\\SonarScanner.MSBuild.exe begin `
 									/k:testing `
 									/n:testing `
@@ -30,6 +31,7 @@ pipeline {
 			steps {
 			print "Restoring Nuget Packages on sln"
 			powershell '''
+			    cd "C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\BuildTools\\MSBuild\\Current\\Bin"
 				C:\\nuget\\nuget.exe restore C:\\Sonarqube_btlaw-test\\BTLaw.sln -source "https://api.nuget.org/v3/index.json" `
 				-source "https://sitecore.myget.org/F/sc-packages/api/v3/index.json" -source "https://teamcity.mkcsites.com/httpAuth/app/nuget/feed/_Root/default/v2/"
 				'''
@@ -60,6 +62,7 @@ pipeline {
 		stage('SonarQube Analysis') {
 				steps {
 							powershell """
+							    cd "C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\BuildTools\\MSBuild\\Current\\Bin"
 								C:\\Jenkins\\sonar-scanner\\SonarScanner.MSBuild.exe end `
 								/d:sonar.login=5e5ee5d92b56eb829ad423cc0354f7c72941abc5 
 							"""
