@@ -37,14 +37,14 @@ pipeline {
 							} else {
 								Write-Error "Cannot find VS 2017 MSBuild"
 							}
-							msbuild $ENV:WORKSPACE\\CernerComSitecore.sln `
-							/p:DeployOnBuild=true `
-							/p:Configuration=Release `
-							/p:TransformOnBuild=false `
-							/p:OutDir=$ENV:WORKSPACE\\Cerner_Build_Artifacts_Jenkins `
+							msbuild C:\\testing_sonarqube\\Denton.sln `
+							/p:DeployOnBuild=true  ` 
+							/p:Configuration=release `
+							/p:DeployDefaultTarget=WebPublish `
+							/p:WebPublishMethod=FileSystem `
 							/p:DeleteExistingFiles=false `
 							/p:BuildProjectReferences=true `
-							/p:AllowedReferenceRelatedFileExtensions=.pdb
+							/p:publishUrl=C:\Denton_Artifact_Sonarqube\
 						'''
 					
 				}
