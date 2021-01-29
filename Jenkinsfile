@@ -26,6 +26,15 @@ pipeline {
 				}
 			}
 		
+		stage('Nuget_Restore') {
+			steps {
+			print "Restoring Nuget Packages on sln"
+			powershell '''
+				C:\\nuget\\nuget.exe restore C:\\testing_sonarqube\\Denton.sln 
+				'''
+			}
+		}
+		
 
 		stage('Build') {
 				steps {
