@@ -4,7 +4,7 @@ pipeline {
     agent any
     
 	environment{
-		MSBUILD_SONAR_HOME = tool 'Sonarqube'
+		
 		VERSION_NUMBER = VersionNumber projectStartDate: '', versionNumberString: '${BUILD_DATE_FORMATTED, "yyyy.MM.dd"}.${Build_Number}-dev', versionPrefix: '', worstResultForIncrement: 'SUCCESS'
     }
 	
