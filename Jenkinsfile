@@ -33,7 +33,8 @@ pipeline {
 					
 					powershell '''
 							
-							C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\BuildTools\\MSBuild\\Current\\Bin\\MSBuild.exe C:\\testing_sonarqube\\Denton.sln `
+							cd "C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\BuildTools\\MSBuild\\Current\\Bin"
+							./MSBuild.exe C:\\testing_sonarqube\\Denton.sln `
 							/p:DeployOnBuild=true  ` 
 							/p:Configuration=release `
 							/p:DeployDefaultTarget=WebPublish `
