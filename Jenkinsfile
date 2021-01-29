@@ -4,7 +4,7 @@ pipeline {
     agent any
     
 	environment{
-		
+		MSBUILD_SONAR_HOME = tool 'Sonarqube'
 		VERSION_NUMBER = VersionNumber projectStartDate: '', versionNumberString: '${BUILD_DATE_FORMATTED, "yyyy.MM.dd"}.${Build_Number}-dev', versionPrefix: '', worstResultForIncrement: 'SUCCESS'
     }
 	
@@ -16,7 +16,7 @@ pipeline {
 					withSonarQubeEnv('Sonarqube') {
 							powershell """
 							    cd "C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\BuildTools\\MSBuild\\Current\\Bin"
-								C:\\Jenkins\\sonar-scanner\\SonarScanner.MSBuild.exe begin `
+								${env.MSBUILD_SONAR_HOME}\\SonarScanner.MSBuild.exe begin `
 									/k:testing `
 									/n:testing `
 									/v:${env.VERSION_NUMBER} `
@@ -64,7 +64,7 @@ pipeline {
 					withSonarQubeEnv('Sonarqube') {
 							powershell """
 							    cd "C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\BuildTools\\MSBuild\\Current\\Bin"
-								C:\\Jenkins\\sonar-scanner\\SonarScanner.MSBuild.exe end `
+								${env.MSBUILD_SONAR_HOME}\\SonarScanner.MSBuild.exe end `
 								/d:sonar.login=5e5ee5d92b56eb829ad423cc0354f7c72941abc5 
 							"""
 						}
