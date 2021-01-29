@@ -30,7 +30,7 @@ pipeline {
 			steps {
 			print "Restoring Nuget Packages on sln"
 			powershell '''
-				C:\\nuget\\nuget.exe restore C:\\testing_sonarqube\\Denton.sln -source "https://api.nuget.org/v3/index.json" `
+				C:\\nuget\\nuget.exe restore C:\\Sonarqube_btlaw-test\\BTLaw.sln -source "https://api.nuget.org/v3/index.json" `
 				-source "https://sitecore.myget.org/F/sc-packages/api/v3/index.json" -source "https://teamcity.mkcsites.com/httpAuth/app/nuget/feed/_Root/default/v2/"
 				'''
 			}
@@ -44,7 +44,7 @@ pipeline {
 					powershell '''
 							
 							cd "C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\BuildTools\\MSBuild\\Current\\Bin"
-							./MSBuild.exe C:\\testing_sonarqube\\Denton.sln `
+							./MSBuild.exe C:\\Sonarqube_btlaw-test\\BTLaw.sln `
 							/p:DeployOnBuild=true  ` 
 							/p:Configuration=release `
 							/p:DeployDefaultTarget=WebPublish `
