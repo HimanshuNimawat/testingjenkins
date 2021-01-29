@@ -59,7 +59,7 @@ pipeline {
 						
 					}
 				}
-			}
+			
 
 		stage('SonarQube-QualityGate') {
 				steps {
