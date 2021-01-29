@@ -15,7 +15,7 @@ pipeline {
 					print "Sonarqube Analysis Start"
 					
 							powershell """
-							    
+							    cd "C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\BuildTools\\MSBuild\\Current\\Bin"
 								C:\\Jenkins\\sonar-scanner\\SonarScanner.MSBuild.exe begin `
 									/k:testing `
 									/n:testing `
@@ -44,13 +44,9 @@ pipeline {
 					print "Building Solution"
 					
 					powershell '''
-							if (Test-Path "C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\BuildTools\\MSBuild\\Current\\Bin\\MSBuild.exe") {
-                            Set-Alias msbuild ${env:msBuildPath}\\MSBuild.exe -Scope Script
-                        } else {
-                            Write-Error "Cannot find VS 2017 MSBuild"
-                        }
 							
-							msbuild C:\\Sonarqube_btlaw-test\\BTLaw.sln `
+							cd "C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\BuildTools\\MSBuild\\Current\\Bin"
+							./MSBuild.exe C:\\Sonarqube_btlaw-test\\BTLaw.sln `
 							/p:DeployOnBuild=true  ` 
 							/p:Configuration=release `
 							/p:DeployDefaultTarget=WebPublish `
@@ -66,7 +62,7 @@ pipeline {
 		stage('SonarQube Analysis') {
 				steps {
 							powershell """
-							    
+							    cd "C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\BuildTools\\MSBuild\\Current\\Bin"
 								C:\\Jenkins\\sonar-scanner\\SonarScanner.MSBuild.exe end `
 								/d:sonar.login=5e5ee5d92b56eb829ad423cc0354f7c72941abc5 
 							"""
@@ -77,6 +73,9 @@ pipeline {
 
 		stage('SonarQube-QualityGate') {
 				steps {
+					powershell """
+					  cd "C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\BuildTools\\MSBuild\\Current\\Bin"
+					  """
 						timeout(time: 1, unit: 'HOURS') {
 							waitForQualityGate abortPipeline: true
 					}
