@@ -32,12 +32,8 @@ pipeline {
 					print "Building Solution"
 					
 					powershell '''
-							if (Test-Path "C:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\BuildTools\\MSBuild\\15.0\\Bin\\MSBuild.exe") {
-								Set-Alias msbuild ${env:msBuildPath}\\MSBuild.exe -Scope Script
-							} else {
-								Write-Error "Cannot find VS 2017 MSBuild"
-							}
-							msbuild C:\\testing_sonarqube\\Denton.sln `
+							
+							C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\BuildTools\\MSBuild\\Current\\Bin\\MSBuild.exe C:\\testing_sonarqube\\Denton.sln `
 							/p:DeployOnBuild=true  ` 
 							/p:Configuration=release `
 							/p:DeployDefaultTarget=WebPublish `
