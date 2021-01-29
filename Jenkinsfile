@@ -13,7 +13,7 @@ pipeline {
 		stage('Start Sonarqube Scanner') {
 				steps {
 					print "Sonarqube Analysis Start"
-					withSonarQubeEnv('SonarQube') {
+					withSonarQubeEnv('Sonarqube') {
 							powershell """
 							    cd "C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\BuildTools\\MSBuild\\Current\\Bin"
 								C:\\Jenkins\\sonar-scanner\\SonarScanner.MSBuild.exe begin `
@@ -61,7 +61,7 @@ pipeline {
 
 		stage('SonarQube Analysis') {
 				steps {
-					withSonarQubeEnv('SonarQube') {
+					withSonarQubeEnv('Sonarqube') {
 							powershell """
 							    cd "C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\BuildTools\\MSBuild\\Current\\Bin"
 								C:\\Jenkins\\sonar-scanner\\SonarScanner.MSBuild.exe end `
