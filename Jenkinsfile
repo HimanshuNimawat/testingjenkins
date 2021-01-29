@@ -44,7 +44,7 @@ pipeline {
 							/p:WebPublishMethod=FileSystem `
 							/p:DeleteExistingFiles=false `
 							/p:BuildProjectReferences=true `
-							/p:publishUrl=C:\Denton_Artifact_Sonarqube\
+							/p:publishUrl=C:\\Denton_Artifact_Sonarqube\\
 						'''
 					
 				}
