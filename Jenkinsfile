@@ -33,7 +33,7 @@ pipeline {
 			print "Restoring Nuget Packages on sln"
 			powershell '''
 			    
-				C:\\nuget\\nuget.exe restore C:\\Sonarqube_btlaw-test\\BTLaw.sln -source "https://api.nuget.org/v3/index.json" `
+				C:\\nuget\\nuget.exe restore $ENV:WORKSPACE\\BTLaw.sln -source "https://api.nuget.org/v3/index.json" `
 				-source "https://sitecore.myget.org/F/sc-packages/api/v3/index.json" -source "https://teamcity.mkcsites.com/httpAuth/app/nuget/feed/_Root/default/v2/"
 				'''
 			}
@@ -51,7 +51,7 @@ pipeline {
                             Write-Error "Cannot find VS 2017 MSBuild"
                         }
 							
-							msbuild C:\\Sonarqube_btlaw-test\\BTLaw.sln `
+							msbuild $ENV:WORKSPACE\\BTLaw.sln `
 							/p:DeployOnBuild=true  ` 
 							/p:Configuration=Release `
 							/p:DeployDefaultTarget=WebPublish `
