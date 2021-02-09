@@ -68,7 +68,7 @@ pipeline {
 				steps {
 					withSonarQubeEnv('Sonarqube') {
 							powershell """
-							    cd "C:\\Windows\\System32\\config\\systemprofile\\AppData\\Local\\Jenkins.jenkins\\workspace\\Jenkinsfiletest_develop"
+							    
 								${env.MSBUILD_SONAR_HOME}\\SonarScanner.MSBuild.exe end `
 								/d:sonar.login=5e5ee5d92b56eb829ad423cc0354f7c72941abc5 
 							"""
