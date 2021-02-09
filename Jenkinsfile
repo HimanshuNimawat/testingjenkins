@@ -71,18 +71,6 @@ pipeline {
 					}
 				}
 			
-
-		stage('SonarQube-QualityGate') {
-				steps {
-					powershell """
-					  cd "C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\BuildTools\\MSBuild\\Current\\Bin"
-					  """
-						timeout(time: 1, unit: 'HOURS') {
-							waitForQualityGate abortPipeline: true
-					}
-				}
-			}
-			
 		}
 	}
 
