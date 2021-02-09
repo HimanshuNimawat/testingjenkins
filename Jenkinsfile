@@ -16,7 +16,7 @@ pipeline {
 					print "Sonarqube Analysis Start"
 					withSonarQubeEnv('Sonarqube') {
 							powershell """
-							    
+							    cd "C:\\Sonarqube_btlaw-test"
 								${env.MSBUILD_SONAR_HOME}\\SonarScanner.MSBuild.exe begin `
 									/k:testing `
 									/n:testing `
@@ -33,7 +33,7 @@ pipeline {
 			print "Restoring Nuget Packages on sln"
 			powershell '''
 			    
-				C:\\nuget\\nuget.exe restore $ENV:WORKSPACE\\BTLaw.sln -source "https://api.nuget.org/v3/index.json" `
+				C:\\nuget\\nuget.exe restore C:\\Sonarqube_btlaw-test\\BTLaw.sln -source "https://api.nuget.org/v3/index.json" `
 				-source "https://sitecore.myget.org/F/sc-packages/api/v3/index.json" -source "https://teamcity.mkcsites.com/httpAuth/app/nuget/feed/_Root/default/v2/"
 				'''
 			}
@@ -50,8 +50,8 @@ pipeline {
                         } else {
                             Write-Error "Cannot find VS 2017 MSBuild"
                         }
-							
-							msbuild $ENV:WORKSPACE\\BTLaw.sln `
+							cd "C:\\Sonarqube_btlaw-test"
+							msbuild C:\\Sonarqube_btlaw-test\\BTLaw.sln `
 							/p:DeployOnBuild=true  ` 
 							/p:Configuration=Release `
 							/p:DeployDefaultTarget=WebPublish `
@@ -68,7 +68,7 @@ pipeline {
 				steps {
 					withSonarQubeEnv('Sonarqube') {
 							powershell """
-							    
+							    cd "C:\\Sonarqube_btlaw-test"
 								${env.MSBUILD_SONAR_HOME}\\SonarScanner.MSBuild.exe end `
 								/d:sonar.login=5e5ee5d92b56eb829ad423cc0354f7c72941abc5 
 							"""
