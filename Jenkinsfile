@@ -5,6 +5,7 @@ pipeline {
     
 	environment{
 		MSBUILD_SONAR_HOME = tool 'Sonarqube'
+		msBuildPath = "C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\BuildTools\\MSBuild\\Current\\Bin"
 		VERSION_NUMBER = VersionNumber projectStartDate: '', versionNumberString: '${BUILD_DATE_FORMATTED, "yyyy.MM.dd"}.${Build_Number}-dev', versionPrefix: '', worstResultForIncrement: 'SUCCESS'
     }
 	
@@ -15,7 +16,7 @@ pipeline {
 					print "Sonarqube Analysis Start"
 					withSonarQubeEnv('Sonarqube') {
 							powershell """
-							    cd "C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\BuildTools\\MSBuild\\Current\\Bin"
+							    
 								${env.MSBUILD_SONAR_HOME}\\SonarScanner.MSBuild.exe begin `
 									/k:testing `
 									/n:testing `
@@ -31,7 +32,7 @@ pipeline {
 			steps {
 			print "Restoring Nuget Packages on sln"
 			powershell '''
-			    cd "C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\BuildTools\\MSBuild\\Current\\Bin"
+			    
 				C:\\nuget\\nuget.exe restore C:\\Sonarqube_btlaw-test\\BTLaw.sln -source "https://api.nuget.org/v3/index.json" `
 				-source "https://sitecore.myget.org/F/sc-packages/api/v3/index.json" -source "https://teamcity.mkcsites.com/httpAuth/app/nuget/feed/_Root/default/v2/"
 				'''
@@ -44,11 +45,15 @@ pipeline {
 					print "Building Solution"
 					
 					powershell '''
+							if (Test-Path "C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\BuildTools\\MSBuild\\Current\\Bin\\MSBuild.exe") {
+                            Set-Alias msbuild ${env:msBuildPath}\\MSBuild.exe -Scope Script
+                        } else {
+                            Write-Error "Cannot find VS 2017 MSBuild"
+                        }
 							
-							cd "C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\BuildTools\\MSBuild\\Current\\Bin"
-							./MSBuild.exe C:\\Sonarqube_btlaw-test\\BTLaw.sln `
+							msbuild C:\\Sonarqube_btlaw-test\\BTLaw.sln `
 							/p:DeployOnBuild=true  ` 
-							
+							/p:Configuration=Release `
 							/p:DeployDefaultTarget=WebPublish `
 							/p:WebPublishMethod=FileSystem `
 							/p:DeleteExistingFiles=false `
@@ -63,7 +68,7 @@ pipeline {
 				steps {
 					withSonarQubeEnv('Sonarqube') {
 							powershell """
-							    cd "C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\BuildTools\\MSBuild\\Current\\Bin"
+							    
 								${env.MSBUILD_SONAR_HOME}\\SonarScanner.MSBuild.exe end `
 								/d:sonar.login=5e5ee5d92b56eb829ad423cc0354f7c72941abc5 
 							"""
