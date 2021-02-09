@@ -51,6 +51,7 @@ pipeline {
                             Write-Error "Cannot find VS 2017 MSBuild"
                         }
 							cd "C:\\Sonarqube_btlaw-test"
+							Get-Location
 							msbuild C:\\Sonarqube_btlaw-test\\BTLaw.sln `
 							/p:DeployOnBuild=true  ` 
 							/p:Configuration=Release `
