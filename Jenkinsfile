@@ -17,11 +17,11 @@ pipeline {
 							powershell """
 							    cd "C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\BuildTools\\MSBuild\\Current\\Bin"
 								C:\\Jenkins\\sonar-scanner\\SonarScanner.MSBuild.exe begin `
-									/k:testing `
-									/n:testing `
+									/k:Cerner-Test `
+									/n:Cerner-Test `
 									/v:${env.VERSION_NUMBER} `
-									/d:sonar.login=5e5ee5d92b56eb829ad423cc0354f7c72941abc5 `
-									/d:sonar.host.url=http://192.168.1.165:9000/ `
+									/d:sonar.login=735e07ee9bcd89f2a80bdd41f39a3b0c236cf71c `
+									/d:sonar.host.url=http://192.168.1.137:9000/ `
 							"""
 					}
 				}
@@ -65,7 +65,7 @@ pipeline {
 							powershell """
 							    cd "C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\BuildTools\\MSBuild\\Current\\Bin"
 								C:\\Jenkins\\sonar-scanner\\SonarScanner.MSBuild.exe end `
-								/d:sonar.login=5e5ee5d92b56eb829ad423cc0354f7c72941abc5 
+								/d:sonar.login=735e07ee9bcd89f2a80bdd41f39a3b0c236cf71c 
 							"""
 						}
 					}
