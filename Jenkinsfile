@@ -19,7 +19,7 @@ pipeline {
 								C:\\Jenkins\\sonar-scanner\\SonarScanner.MSBuild.exe begin `
 									/k:testing `
 									/n:testing `
-									/v: 56
+									/v:2021.04.07.72-dev
 									/d:sonar.login=5e5ee5d92b56eb829ad423cc0354f7c72941abc5 `
 									/d:sonar.host.url=http://192.168.1.165:9000/ `
 							"""
