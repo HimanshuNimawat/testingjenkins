@@ -5,7 +5,7 @@ pipeline {
     
 	environment{
 		
-		VERSION_NUMBER = VersionNumber projectStartDate: '', versionNumberString: '${BUILD_DATE_FORMATTED, "yyyy.MM.dd"}.${Build_Number}-dev', versionPrefix: '', worstResultForIncrement: 'SUCCESS'
+		VERSION_NUMBER = VersionNumber projectStartDate: '', versionNumberString: '${BUILD_DATE_FORMATTED, "yyyy.MM.dd"}-dev', versionPrefix: '', worstResultForIncrement: 'SUCCESS'
     }
 	
 	stages {
