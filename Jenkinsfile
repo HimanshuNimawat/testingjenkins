@@ -12,10 +12,10 @@ pipeline {
 
     	stage ('Test') {
     	    steps {
-                powershell '''ssh -tt C:\\Users\\HNimawat\\Desktop\\biswa.pem ec2-user@34.207.60.174
-			ls
-			exit
-                '''
+                powershell '''ssh -itt C:\\Users\\HNimawat\\Desktop\\biswa.pem ec2-user@34.207.60.174 >>ENDSSH
+		ls
+                ENDSSH
+		'''
             }
         }  
     }
