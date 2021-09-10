@@ -15,7 +15,7 @@ pipeline {
                 script {
                      if (env.BRANCH_NAME == main) {
                          powershell '''
-			echo 'main branch'
+			echo 'main branc'
 		'''
 			  
                        }
