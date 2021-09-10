@@ -12,7 +12,7 @@ pipeline {
 
     	stage ('Test') {
     	    steps {
-                powerhsell '''ssh -i C:\biswa.pem ec2-user@34.207.60.174 "ls"
+                powershell '''ssh -i C:\biswa.pem ec2-user@34.207.60.174 "ls"
                 '''
             }
         }  
